@@ -94,7 +94,7 @@ export async function GET(request: NextRequest) {
 
     // 6. Fetch message details (metadata only for efficiency)
     const messages = await Promise.all(
-      messageIds.map(async (msg: { id?: string | null }) => {
+      messageIds.map(async (msg: any) => {
         if (!msg.id) return null;
         const detail = await gmail.users.messages.get({
           userId: 'me',
@@ -105,7 +105,7 @@ export async function GET(request: NextRequest) {
 
         const headers = detail.data.payload?.headers || [];
         const getHeader = (name: string) =>
-          headers.find((h: { name?: string }) => h.name?.toLowerCase() === name.toLowerCase())?.value || '';
+          headers.find((h: any) => h.name?.toLowerCase() === name.toLowerCase())?.value || '';
 
         return {
           id: detail.data.id,
