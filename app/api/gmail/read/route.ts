@@ -56,7 +56,7 @@ export async function GET(request: NextRequest) {
     }
 
     // 3. Create Gmail client
-    const gmail = getGmailClient(oauth.access_token, oauth.refresh_token);
+    const gmail = await getGmailClient(oauth.access_token, oauth.refresh_token);
 
     // 4. Parse query params
     const maxResults = Math.min(
